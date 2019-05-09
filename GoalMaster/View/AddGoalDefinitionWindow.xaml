@@ -1,0 +1,85 @@
+﻿<Window x:Class="GoalMaster.View.AddGoalDefinitionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoalMaster.View"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        xmlns:Helper="clr-namespace:GoalMaster.Helpers"
+        Title="AddGoalDefinitionWindow" Height="450" Width="450"
+        >
+    <Window.Resources>
+        <Helper:FontSizeConverter x:Key="fontSizeCon" />
+    </Window.Resources>
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">Name of your goal</Label>
+        <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,30,20,10"
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource fontSizeCon}}"/>
+        <Label Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">Description</Label>
+        <TextBox Grid.Column="0"  Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,30,20,10"
+                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource fontSizeCon}}"/>
+        <Label Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">Type of goal</Label>
+        <ComboBox 
+            ItemsSource="{Binding Path=GoalTypes}"
+            SelectedItem="{Binding Path=FirstGoalType,Mode=TwoWay}" 
+            DisplayMemberPath="Description"
+            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="20,30,20,10"/>
+
+        <Button Command="{Binding AddFriendCommand}" 
+            Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,20,10">
+            Add friend
+        </Button>
+        <Button Command="{Binding RemoveFriendCommand}"  
+            Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,20,10">
+            Remove friend
+        </Button>
+        <Label Grid.Row="3" Grid.ColumnSpan="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">Friends</Label>
+        <ListBox Grid.Column="0" HorizontalAlignment="Stretch"   Grid.Row="3" Grid.RowSpan="2" 
+                 VerticalAlignment="Stretch" Margin="20,20,20,0"
+                 ItemsSource="{Binding Path=Friends}"
+                 SelectedItem="{Binding Path=SelectedFriend}"
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Login}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Grid.Row="3" Grid.ColumnSpan="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">Invited friends</Label>
+        <ListBox Grid.Column="1" HorizontalAlignment="Stretch"   Grid.Row="3" Grid.RowSpan="2" 
+                 VerticalAlignment="Stretch" Margin="20,20,20,00"
+                 ItemsSource="{Binding Path=InvitedFriends}"
+                 SelectedItem="{Binding Path=SelectedInvitedFriend}"
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Login}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Command="{Binding AddNewGoalCommand}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="6" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,20,10">
+            Add Goal
+        </Button>
+       
+
+
+    </Grid>
+</Window>

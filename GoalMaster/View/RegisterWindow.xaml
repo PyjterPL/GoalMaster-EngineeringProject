@@ -1,0 +1,81 @@
+﻿<Window x:Class="GoalMaster.View.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoalMaster.View"
+        xmlns:Helper="clr-namespace:GoalMaster.Helpers"
+        mc:Ignorable="d"
+        Title="RegisterWindow" Height="450" Width="800"
+         DataContext="{Binding Source={StaticResource Locator}, Path=Registration}">
+    <Window.Resources>
+        <Helper:FontSizeConverter x:Key="fontSizeCon" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">Login</Label>
+        <TextBox Name="Login" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                 Margin="20,30,20,30"
+                 VerticalContentAlignment ="Center"
+                 Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource fontSizeCon}}" >
+        </TextBox>
+        <Label Foreground="Red" Content="{Binding LoginValidation, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">Password</Label>
+        <PasswordBox Name="Password" 
+                 Helper:PasswordBoxAssistant.BindPassword="true"
+                 Helper:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                 Margin="20,30,20,30"
+                 VerticalContentAlignment ="Center"
+                 
+                 FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource fontSizeCon}}">
+        </PasswordBox>
+        <Label Content="{Binding PasswordStrength, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">Password again</Label>
+        <Label Content="{Binding PasswordIdentical, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+        <PasswordBox Name="PasswordRepeat" 
+                 Helper:PasswordBoxAssistant.BindPassword="true"
+                 Helper:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordRepeated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                 Margin="20,30,20,30"
+                 VerticalContentAlignment ="Center"
+                 FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource fontSizeCon}}">
+        </PasswordBox>
+
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">E-mail</Label>
+        <TextBox  Name="Mail" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                 Margin="20,30,20,30"
+                 VerticalContentAlignment ="Center"
+                  Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource fontSizeCon}}">
+        </TextBox>
+        <Label Foreground="Red" Content="{Binding MailWalidation, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+        <Button Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                 Margin="20,30,20,30"
+                 VerticalContentAlignment ="Center"
+                Command="{Binding RegisterCommand}">
+            Register
+        </Button>
+        <Button Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                 Margin="20,30,20,30"
+                 VerticalContentAlignment ="Center"
+                Command="{Binding BackCommand}">
+            <TextBlock>
+                &lt;-
+            </TextBlock>
+        </Button>
+        <Label Foreground="Red" Content="{Binding IsInternetConnection, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+    </Grid>
+</Window>
